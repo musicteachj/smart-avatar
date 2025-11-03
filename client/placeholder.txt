@@ -1,0 +1,1 @@
+This is where the Vue 3 + Vite + Vuetify 3 app will be
