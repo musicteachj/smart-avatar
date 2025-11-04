@@ -14,14 +14,14 @@
         </div>
 
         <!-- Core Demo Examples -->
-        <v-row v-if="user0 && user1 && user2 && user3">
+        <v-row v-if="hasEnoughUsers">
           <!-- Example 1: Initials Only -->
           <v-col cols="12" sm="6" md="3">
             <v-card elevation="2" class="pa-4 h-100">
               <div class="d-flex flex-column align-center">
                 <SmartAvatar
-                  :name="user0.name"
-                  :sources="user0.sources"
+                  :name="coreUsers[0]!.name"
+                  :sources="coreUsers[0]!.sources"
                   size="large"
                   :autoplay="false"
                   :loop="false"
@@ -33,7 +33,7 @@
                     with a deterministic color based on their name.
                   </p>
                   <v-chip size="small" color="primary" class="mt-2">
-                    {{ user0.name }}
+                    {{ coreUsers[0]!.name }}
                   </v-chip>
                 </div>
               </div>
@@ -45,8 +45,8 @@
             <v-card elevation="2" class="pa-4 h-100">
               <div class="d-flex flex-column align-center">
                 <SmartAvatar
-                  :name="user1.name"
-                  :sources="user1.sources"
+                  :name="coreUsers[1]!.name"
+                  :sources="coreUsers[1]!.sources"
                   size="large"
                   :autoplay="false"
                   :loop="false"
@@ -58,7 +58,7 @@
                     shadow and proper sizing.
                   </p>
                   <v-chip size="small" color="success" class="mt-2">
-                    {{ user1.name }}
+                    {{ coreUsers[1]!.name }}
                   </v-chip>
                 </div>
               </div>
@@ -70,8 +70,8 @@
             <v-card elevation="2" class="pa-4 h-100">
               <div class="d-flex flex-column align-center">
                 <SmartAvatar
-                  :name="user2.name"
-                  :sources="user2.sources"
+                  :name="coreUsers[2]!.name"
+                  :sources="coreUsers[2]!.sources"
                   size="large"
                   :autoplay="false"
                   :loop="true"
@@ -83,7 +83,7 @@
                     Hover to reveal controls.
                   </p>
                   <v-chip size="small" color="warning" class="mt-2">
-                    {{ user2.name }}
+                    {{ coreUsers[2]!.name }}
                   </v-chip>
                 </div>
               </div>
@@ -95,8 +95,8 @@
             <v-card elevation="2" class="pa-4 h-100">
               <div class="d-flex flex-column align-center">
                 <SmartAvatar
-                  :name="user3.name"
-                  :sources="user3.sources"
+                  :name="coreUsers[3]!.name"
+                  :sources="coreUsers[3]!.sources"
                   size="large"
                   :autoplay="true"
                   :loop="true"
@@ -108,7 +108,7 @@
                     Supports navigation arrows.
                   </p>
                   <v-chip size="small" color="error" class="mt-2">
-                    {{ user3.name }}
+                    {{ coreUsers[3]!.name }}
                   </v-chip>
                 </div>
               </div>
@@ -129,13 +129,13 @@
                 (96px), and large (144px)
               </p>
               <div
-                v-if="user0 && user1 && user2"
+                v-if="hasEnoughUsers"
                 class="d-flex align-center justify-center flex-wrap ga-8"
               >
                 <div class="text-center">
                   <SmartAvatar
-                    :name="user0.name"
-                    :sources="user0.sources"
+                    :name="coreUsers[0]!.name"
+                    :sources="coreUsers[0]!.sources"
                     size="small"
                     :autoplay="false"
                     :loop="false"
@@ -145,8 +145,8 @@
                 </div>
                 <div class="text-center">
                   <SmartAvatar
-                    :name="user1.name"
-                    :sources="user1.sources"
+                    :name="coreUsers[1]!.name"
+                    :sources="coreUsers[1]!.sources"
                     size="medium"
                     :autoplay="false"
                     :loop="false"
@@ -156,8 +156,8 @@
                 </div>
                 <div class="text-center">
                   <SmartAvatar
-                    :name="user2.name"
-                    :sources="user2.sources"
+                    :name="coreUsers[2]!.name"
+                    :sources="coreUsers[2]!.sources"
                     size="large"
                     :autoplay="false"
                     :loop="false"
@@ -175,19 +175,17 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import SmartAvatar from "../components/SmartAvatar.vue";
 import FeatureHighlights from "../components/FeatureHighlights.vue";
 import { useAvatarStore } from "../stores/avatarStore";
 
 const avatarStore = useAvatarStore();
-const coreUsers = computed(() => avatarStore.getCoreUsers());
+const { coreUsers } = storeToRefs(avatarStore);
 
-// Safe accessors with default values
-const user0 = computed(() => coreUsers.value[0]);
-const user1 = computed(() => coreUsers.value[1]);
-const user2 = computed(() => coreUsers.value[2]);
-const user3 = computed(() => coreUsers.value[3]);
+// Create safe accessors with proper type guards
+const hasEnoughUsers = computed(() => coreUsers.value.length >= 4);
 </script>
 
 <style scoped>
