@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
-const viteLogoSrc = '/vite.svg'
+import viteLogoUrl from '/vite.svg?url'
+
+const viteLogoSrc = viteLogoUrl
 </script>
 
