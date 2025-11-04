@@ -5,7 +5,7 @@
         <!-- Header -->
         <div class="text-center mb-8">
           <h1 class="text-h3 font-weight-bold mb-3">
-            SmartAvatar Component Demo
+            Smart Avatar Component Demo
           </h1>
           <p class="text-subtitle-1 text-medium-emphasis">
             A versatile Vue 3 component that intelligently displays user avatars
