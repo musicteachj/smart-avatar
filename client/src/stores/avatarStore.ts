@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import type { User } from "../types/avatar";
 
 /**
@@ -113,25 +113,19 @@ export const useAvatarStore = defineStore("avatar", () => {
     },
   ]);
 
-  // All users combined
-  const allUsers = ref<User[]>([...coreUsers.value, ...profileUsers.value]);
+  // All users combined - computed for reactivity
+  const allUsers = computed(() => [...coreUsers.value, ...profileUsers.value]);
 
   // Getters
-  const getCoreUsers = () => coreUsers.value;
-  const getProfileUsers = () => profileUsers.value;
-  const getAllUsers = () => allUsers.value;
   const getUserById = (id: string) =>
     allUsers.value.find((user) => user.id === id);
 
   return {
-    // State
+    // State - exposed as refs for reactivity
     coreUsers,
     profileUsers,
     allUsers,
     // Getters
-    getCoreUsers,
-    getProfileUsers,
-    getAllUsers,
     getUserById,
   };
 });

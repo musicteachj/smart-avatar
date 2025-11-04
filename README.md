@@ -2,6 +2,10 @@
 
 A Vue 3 component that displays user avatars intelligently — shows initials if there's no media, a single image/video if there's one source, or a carousel if there are multiple.
 
+## 🚀 Live Demo
+
+Check out the live application: **[https://musicteachj.github.io/smart-avatar/](https://musicteachj.github.io/smart-avatar/)**
+
 ## How to Run
 
 ```bash

@@ -102,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onBeforeUnmount } from "vue";
 import type { SmartAvatarProps } from "../types/avatar";
 import { getInitials, getColorFromName } from "../utils/avatarHelpers";
 
@@ -110,8 +110,6 @@ import { getInitials, getColorFromName } from "../utils/avatarHelpers";
 const props = withDefaults(defineProps<SmartAvatarProps>(), {
   sources: () => [],
   size: "medium",
-  autoplay: false,
-  loop: false,
 });
 
 // Size mapping to pixels
@@ -170,6 +168,14 @@ const handleVideoPlay = () => {
 const handleVideoPause = () => {
   isVideoPlaying.value = false;
 };
+
+// Cleanup video resources before unmount
+onBeforeUnmount(() => {
+  if (videoRef.value) {
+    videoRef.value.pause();
+    videoRef.value = null;
+  }
+});
 </script>
 
 <style scoped>
