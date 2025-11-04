@@ -55,7 +55,7 @@
     <!-- Mode 3: Carousel (Multiple Media) -->
     <div
       v-else-if="displayMode === 'carousel'"
-      class="smart-avatar-carousel"
+      class="smart-avatar-carousel elevation-3"
       :style="{ width: `${avatarSize}px`, height: `${avatarSize}px` }"
     >
       <v-carousel
@@ -65,6 +65,7 @@
         hide-delimiter-background
         height="100%"
         class="circular-carousel"
+        hide-delimiters
       >
         <v-carousel-item
           v-for="(source, index) in sources"
@@ -75,7 +76,7 @@
           <v-avatar
             v-if="source.type === 'image'"
             :size="avatarSize"
-            class="smart-avatar elevation-3"
+            class="smart-avatar"
           >
             <v-img :src="source.url" :alt="`${name} ${index + 1}`" cover />
           </v-avatar>
@@ -84,7 +85,7 @@
           <v-avatar
             v-else-if="source.type === 'video'"
             :size="avatarSize"
-            class="smart-avatar elevation-3"
+            class="smart-avatar"
           >
             <video
               :src="source.url"
@@ -254,6 +255,13 @@ const handleVideoPause = () => {
 .circular-carousel :deep(.v-btn) {
   opacity: 0;
   transition: opacity 0.2s ease;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+}
+
+.circular-carousel :deep(.v-btn .v-icon) {
+  font-size: 16px;
 }
 
 .smart-avatar-carousel:hover :deep(.v-btn) {
