@@ -18,6 +18,11 @@ export interface SmartAvatarProps {
 }
 
 /**
+ * User status types for presence indicators
+ */
+export type UserStatus = "online" | "offline" | "busy" | "away";
+
+/**
  * User interface for demo data
  */
 export interface User {
@@ -26,4 +31,6 @@ export interface User {
   sources?: MediaSource[];
   role?: string;
   bio?: string;
+  status?: UserStatus;
+  email?: string;
 }
