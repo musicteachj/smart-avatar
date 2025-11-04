@@ -56,6 +56,7 @@
     <div
       v-else-if="displayMode === 'carousel'"
       class="smart-avatar-carousel elevation-3"
+      :class="`carousel-size-${props.size}`"
       :style="{ width: `${avatarSize}px`, height: `${avatarSize}px` }"
     >
       <v-carousel
@@ -180,8 +181,9 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .smart-avatar-container {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
+  align-items: center;
 }
 
 .smart-avatar {
@@ -258,6 +260,7 @@ onBeforeUnmount(() => {
   background: transparent;
 }
 
+/* Default arrow sizes for medium */
 .circular-carousel :deep(.v-btn) {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -268,6 +271,22 @@ onBeforeUnmount(() => {
 
 .circular-carousel :deep(.v-btn .v-icon) {
   font-size: 16px;
+}
+
+/* Small avatar carousel arrows - hide them completely */
+.carousel-size-small .circular-carousel :deep(.v-btn) {
+  display: none !important;
+}
+
+/* Large avatar carousel arrows */
+.carousel-size-large .circular-carousel :deep(.v-btn) {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+}
+
+.carousel-size-large .circular-carousel :deep(.v-btn .v-icon) {
+  font-size: 20px;
 }
 
 .smart-avatar-carousel:hover :deep(.v-btn) {
