@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import type { User } from "../types/avatar";
 
 /**
@@ -15,6 +15,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       sources: [], // Initials only
       role: "Software Engineer",
       bio: "Building great things with Vue and TypeScript",
+      status: "online",
+      email: "john.smith@example.com",
     },
     {
       id: "2",
@@ -27,6 +29,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       ],
       role: "Product Designer",
       bio: "Crafting beautiful and intuitive user experiences",
+      status: "busy",
+      email: "jane.doe@example.com",
     },
     {
       id: "3",
@@ -39,6 +43,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       ],
       role: "Marketing Manager",
       bio: "Telling stories that connect with people",
+      status: "away",
+      email: "bob.johnson@example.com",
     },
     {
       id: "4",
@@ -59,6 +65,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       ],
       role: "Creative Director",
       bio: "Leading creative vision across multiple projects",
+      status: "online",
+      email: "alice.wong@example.com",
     },
   ]);
 
@@ -75,6 +83,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       ],
       role: "Frontend Developer",
       bio: "Passionate about creating accessible and performant web applications. Love working with Vue 3 and the latest web technologies.",
+      status: "online",
+      email: "sarah.chen@example.com",
     },
     {
       id: "6",
@@ -91,6 +101,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       ],
       role: "UX Researcher",
       bio: "Uncovering user insights to drive better product decisions. Bridging the gap between users and design teams.",
+      status: "offline",
+      email: "michael.torres@example.com",
     },
     {
       id: "7",
@@ -98,6 +110,8 @@ export const useAvatarStore = defineStore("avatar", () => {
       sources: [], // Initials for variety
       role: "Data Scientist",
       bio: "Transforming complex data into actionable insights. Specializing in machine learning and predictive analytics.",
+      status: "online",
+      email: "emily.rodriguez@example.com",
     },
     {
       id: "8",
@@ -110,28 +124,24 @@ export const useAvatarStore = defineStore("avatar", () => {
       ],
       role: "DevOps Engineer",
       bio: "Building and maintaining robust CI/CD pipelines. Automating all the things to ship faster and safer.",
+      status: "away",
+      email: "david.kim@example.com",
     },
   ]);
 
-  // All users combined
-  const allUsers = ref<User[]>([...coreUsers.value, ...profileUsers.value]);
+  // All users combined - computed for reactivity
+  const allUsers = computed(() => [...coreUsers.value, ...profileUsers.value]);
 
   // Getters
-  const getCoreUsers = () => coreUsers.value;
-  const getProfileUsers = () => profileUsers.value;
-  const getAllUsers = () => allUsers.value;
   const getUserById = (id: string) =>
     allUsers.value.find((user) => user.id === id);
 
   return {
-    // State
+    // State - exposed as refs for reactivity
     coreUsers,
     profileUsers,
     allUsers,
     // Getters
-    getCoreUsers,
-    getProfileUsers,
-    getAllUsers,
     getUserById,
   };
 });

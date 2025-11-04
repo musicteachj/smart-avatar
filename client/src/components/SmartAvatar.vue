@@ -56,6 +56,7 @@
     <div
       v-else-if="displayMode === 'carousel'"
       class="smart-avatar-carousel elevation-3"
+      :class="`carousel-size-${props.size}`"
       :style="{ width: `${avatarSize}px`, height: `${avatarSize}px` }"
     >
       <v-carousel
@@ -102,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onBeforeUnmount } from "vue";
 import type { SmartAvatarProps } from "../types/avatar";
 import { getInitials, getColorFromName } from "../utils/avatarHelpers";
 
@@ -110,8 +111,6 @@ import { getInitials, getColorFromName } from "../utils/avatarHelpers";
 const props = withDefaults(defineProps<SmartAvatarProps>(), {
   sources: () => [],
   size: "medium",
-  autoplay: false,
-  loop: false,
 });
 
 // Size mapping to pixels
@@ -170,12 +169,21 @@ const handleVideoPlay = () => {
 const handleVideoPause = () => {
   isVideoPlaying.value = false;
 };
+
+// Cleanup video resources before unmount
+onBeforeUnmount(() => {
+  if (videoRef.value) {
+    videoRef.value.pause();
+    videoRef.value = null;
+  }
+});
 </script>
 
 <style scoped>
 .smart-avatar-container {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
+  align-items: center;
 }
 
 .smart-avatar {
@@ -252,6 +260,7 @@ const handleVideoPause = () => {
   background: transparent;
 }
 
+/* Default arrow sizes for medium */
 .circular-carousel :deep(.v-btn) {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -262,6 +271,22 @@ const handleVideoPause = () => {
 
 .circular-carousel :deep(.v-btn .v-icon) {
   font-size: 16px;
+}
+
+/* Small avatar carousel arrows - hide them completely */
+.carousel-size-small .circular-carousel :deep(.v-btn) {
+  display: none !important;
+}
+
+/* Large avatar carousel arrows */
+.carousel-size-large .circular-carousel :deep(.v-btn) {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+}
+
+.carousel-size-large .circular-carousel :deep(.v-btn .v-icon) {
+  font-size: 20px;
 }
 
 .smart-avatar-carousel:hover :deep(.v-btn) {
