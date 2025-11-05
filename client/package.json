@@ -1,7 +1,21 @@
 {
-  "name": "Smart Avatar",
+  "name": "smart-avatar",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A Vue 3 component that displays user avatars intelligently",
+  "author": "James Littlefield",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musicteachj/smart-avatar"
+  },
+  "keywords": [
+    "vue",
+    "avatar",
+    "component",
+    "typescript",
+    "vuetify"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
