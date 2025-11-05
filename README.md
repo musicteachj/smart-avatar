@@ -43,6 +43,16 @@ Created a demo page showcasing all the variations. Used a responsive grid layout
 **Phase 5: Polish**  
 Tested everything across different screen sizes, fixed some edge cases with the video controls, and made sure the carousel arrows only show up on hover. Added this README and cleaned up any unused files from the initial template.
 
+**Phase 6: Enhanced Demo with Real-World Examples**  
+Expanded the demo into a multi-tab showcase to demonstrate practical applications of the SmartAvatar component. Added four focused tabs:
+
+- **Core Examples**: The original requirement demos - initials, image, video, and carousel modes with size variations
+- **Status & Presence**: Added status badges (online, busy, away, offline) with tooltips, showing how avatars work in real-time communication apps
+- **Lists**: Team member lists and message threads demonstrating avatar usage in common list contexts
+- **Data Table**: Full-featured sortable, searchable data table with small avatars, perfect for admin dashboards and directories
+
+Enhanced the component itself to handle dynamic sizing better - carousel arrows now scale appropriately (or hide completely for small avatars), and all carousel avatars autoplay consistently across the demo. Added user status and email fields to the data model to support the richer examples.
+
 ## What I'd Add With More Time
 
 **User uploads**: Right now it just uses static demo data. Adding drag-and-drop image uploads would make this actually useful.
