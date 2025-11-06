@@ -55,7 +55,7 @@ export const getColorFromName = (name: string): string => {
     "#90a4ae", // blue grey
   ];
 
-  if (!name) return colors[0];
+  if (!name) return colors[0]!;
 
   // Sum character codes to get consistent index
   let sum = 0;
@@ -63,5 +63,5 @@ export const getColorFromName = (name: string): string => {
     sum += name.charCodeAt(i);
   }
 
-  return colors[sum % colors.length];
+  return colors[sum % colors.length]!;
 };
